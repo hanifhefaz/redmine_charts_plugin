@@ -3,6 +3,8 @@ Tested with Redmine 6.0
 
 This plugin adds charts for projects and issues in Redmine.
 
+<img src="images/charts.png">
+
 ## Installation
 
 1. Place the plugin in `plugins` folder.
