@@ -1,0 +1,48 @@
+<h1>Charts Dashboard</h1>
+
+<%= form_with url: charts_path, method: :get, local: true do %>
+  <label>Project:</label>
+  <%= select_tag :project_id, options_from_collection_for_select(@projects, :id, :name, @selected_project), include_blank: 'All' %>
+
+  <label>Tracker:</label>
+  <%= select_tag :tracker_id, options_from_collection_for_select(@trackers, :id, :name, @selected_tracker), include_blank: 'All' %>
+
+  <label>Status:</label>
+  <%= select_tag :status_id, options_from_collection_for_select(@statuses, :id, :name, @selected_status), include_blank: 'All' %>
+
+  <%= submit_tag 'Filter' %>
+<% end %>
+
+<!-- First row: 3 charts side by side -->
+<div style="display: flex; gap: 20px; width: 100%; margin-top: 20px;">
+  <div style="flex: 1;">
+    <canvas id="barChart" width="250" height="250"></canvas>
+  </div>
+  <div style="flex: 1;">
+    <canvas id="pieChart" width="250" height="250"></canvas>
+  </div>
+  <div style="flex: 1;">
+    <canvas id="lineChart" width="250" height="250"></canvas>
+  </div>
+</div>
+
+<!-- Second row: Radar, Polar Area, and Bubble charts -->
+<div style="display: flex; gap: 20px; width: 100%; margin-top: 40px;">
+  <div style="flex: 1;">
+    <canvas id="radarChart" width="250" height="250"></canvas>
+  </div>
+  <div style="flex: 1;">
+    <canvas id="polarAreaChart" width="250" height="250"></canvas>
+  </div>
+  <div style="flex: 1;">
+    <canvas id="bubbleChart" width="250" height="250"></canvas>
+  </div>
+</div>
+
+
+<script>
+  var chartData = <%= raw @chart_data.to_json %>;
+</script>
+
+<%= javascript_include_tag 'chart' %>
+<%= javascript_include_tag 'charts' %>
